@@ -1,0 +1,58 @@
+{% extends "layout.html" %} 
+{% block content %}
+<section>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-md-8">
+            {% with messages = get_flashed_messages() %} 
+                {% if messages %} 
+                    {% if "error" in messages[0] %}
+                        <div class="alert alert-danger" role="alert">
+                            {{messages[0]}}
+                        </div>
+                    {% else %}
+                        <div class="alert alert-success" role="alert">
+                            {{messages[0]}}
+                        </div>
+                    {% endif %} 
+                {% endif %} 
+            {% endwith %}
+        </div>
+        <div class="col-sm-2"></div>
+
+        <div class="col-sm-2"></div>
+        <div class="col-md-8">
+            <div class="table-responsive text-nowrap">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Session {{sessionid}}</h5>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Word</th>
+                                    <th>Answer</th>
+                                    <th>Result</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for mark in marks %}
+                                    <tr>
+                                        {% for word in words %}
+                                            {% if word.id == mark.wordid %}
+                                                <td>{{word.characters}}</td>
+                                            {% endif %}
+                                        {% endfor %}
+                                        <td>{{mark.answer}}</td>
+                                        <td>{{mark.passed}}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</section>
+{% endblock %}

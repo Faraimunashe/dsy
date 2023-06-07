@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Audio Recorder</title>
+</head>
+<body>
+  <h1>Audio Recorder</h1>
+
+  <button id="recordButton">Record</button>
+  <button id="stopButton" disabled>Stop</button>
+
+  <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+  <script>
+    var recordButton = document.getElementById('recordButton');
+    var stopButton = document.getElementById('stopButton');
+    var audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    var audioStream;
+    var recorder;
+
+    recordButton.addEventListener('click', startRecording);
+    stopButton.addEventListener('click', stopRecording);
+
+    function startRecording() {
+        recordButton.disabled = true;
+        stopButton.disabled = false;
+
+        navigator.mediaDevices.getUserMedia({ audio: true })
+            .then(function(stream) {
+            audioStream = stream;
+            var input = audioContext.createMediaStreamSource(stream);
+            recorder = new Recorder(input);
+            recorder.record();
+            })
+            .catch(function(err) {
+            console.error('Error accessing microphone', err);
+            });
+    }
+
+    function stopRecording() {
+        recordButton.disabled = false;
+        stopButton.disabled = true;
+
+        recorder.stop();
+        audioStream.getAudioTracks()[0].stop();
+
+        recorder.exportWAV(uploadAudio);
+    }
+
+    function uploadAudio(blob) {
+        var formData = new FormData();
+        formData.append('audio', blob, 'recording.mp3');
+
+        fetch('/therapy', {
+            method: 'POST',
+            body: formData
+        })
+        .then(function(response) {
+            console.log('Audio uploaded successfully');
+        })
+        .catch(function(err) {
+            console.error('Error uploading audio', err);
+        });
+    }
+  </script>
+</body>
+</html>

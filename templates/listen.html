@@ -1,0 +1,32 @@
+{% extends "layout.html" %} 
+{% block content %}
+<h1 class="welcome p-5">Enhance your listening here...</h1>
+		<form action="#", method="post">
+			{% set count = namespace(value=0) %}
+			{% for word in words %}
+				{% set count.value = count.value + 1 %}
+				<div class="form-group row">
+					<label for="inputWord1" class="col-sm-2 col-form-label">Word {{count.value}}</label>
+					<div class="col-sm-6 pt-1">
+						<input type="text" class="form-control" name="{{count.value}}" placeholder="Type what you hear..." required>
+					</div>
+					<input type="hidden" class="form-control" name="a{{count.value}}" value="{{word.id}}" required>
+					<div class="col-sm-4">
+						<audio controls>
+							<source src="{{word.file}}" type="audio/mp3">
+							Your browser does not support the audio element.
+						</audio>
+					</div>
+				</div>
+			{% endfor %}
+			<div class = "row ending_2">
+				<div class="col-sm-4"></div>
+				<div class="col-sm-4 text-center">
+					<div class="wrap">
+						<button class="button" type="submit">Submit</button>
+					</div>
+				</div>
+				<div class="col-sm-4"></div>
+			</div>
+		</form>
+{% endblock %}

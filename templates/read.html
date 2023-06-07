@@ -1,0 +1,30 @@
+{% extends "base.html" %} 
+{% block content %}
+<h1 class="welcome p-4">Enhance your reading here...</h1>
+<div class="row">
+	<div class="col-sm-6">
+		<img src= {{ image }} alt="Practice Image" class="practice_img">
+	</div>
+	<div class="col-sm-6">
+		<form action="" method="post" class="mt-5">
+			{% set count = namespace(value=0) %}
+			{% for word in words %}
+				{% set count.value = count.value + 1 %}
+				<div class="form-group row">
+					<label for="readWord1" class="col-sm-2 col-form-label">Word {{count.value}}</label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" id="readWord1" name="{{count.value}}" required>
+						<input type="hidden" class="form-control" id="readWord1" name="a{{count.value}}" value="{{word}}" required>
+					</div>
+				</div>
+			{% endfor %}
+
+		  <div class="form-group row wrap">
+			<div class="col-sm-10">
+			  <input type="submit" class="button" name="submit_button" value="SUBMIT"/>
+			</div>
+		  </div>
+		</form>
+	</div>
+</div>
+{% endblock %}

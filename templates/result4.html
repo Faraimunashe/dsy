@@ -1,0 +1,64 @@
+{% extends "layout.html" %} 
+{% block content %}
+		<h1 class="welcome m-4" style="text-align: center;">Here is your performance</h1>
+		<img src="/static/img/down.png" alt="Front Page Logo" class="imagecenter_1">
+		<div class="row top" >
+			<div class="col-sm-4 check_words in_word">
+				<h1 class="res">Your Spelling</h1>
+			</div>
+			<div class="col-sm-4 check_words real_word">
+				<h1 class="res">Correct Spelling</h1>
+			</div>
+			<div class="col-sm-4 check_words out">
+				<h1 class="res">Remarks</h1>
+			</div>
+		</div>
+		{% set count = namespace(value=0) %}
+		{% for mark in marks %}
+			<div class="row" >
+				<div class="col-sm-4 check_words in_word">
+					<h4 class="res">{{mark.answer}}</h4>
+				</div>
+				
+				<div class="col-sm-4 check_words real_word">
+					{% for word in words %}
+                        {% if word.id == mark.wordid %}
+							<h4 class="res">{{word.characters}}</h4>
+                        {% endif %}
+                    {% endfor %}
+				</div>
+				<div class="col-sm-4 check_words out">
+					{% if mark.passed %}
+						<h4 class="res">Exellent</h4>
+					{% else %}
+						<h4 class="res">Will improve</h4>
+					{% endif %}
+				</div>
+			</div>
+			{% if mark.passed %}
+				{% set count.value = count.value + 1 %}
+			{% endif %}
+		{% endfor %}
+
+		<h1 class="welcome" style="text-align: center;">
+			{% if count.value < 5 %}
+				{{count.value}}/10 Recommended Therapy Session, you have Dyslexia!
+			{% else %}
+				{{count.value}}/10 You Do Not Have Dyslexia!
+			{% endif %}
+		</h1>
+		<div class="row ending">
+			<div class="col-sm-4 text-center"></div>
+			<div class="col-sm-4 text-center">
+	    		<div class="wrap">
+					{% if count.value < 5 %}
+						<button class="button" onclick="window.location.href='https://shaileshthedarkknight.github.io/';">PROCEED TO THERAPY!</button>
+					{% else %}
+						<button class="button" onclick="window.location.href='{{ url_for( 'student' ) }}';">PROCEED HOME!</button>
+					{% endif %}
+  					
+				</div>
+	    	</div>
+	    	<div class="col-sm-4 text-center"></div>
+		</div>
+{% endblock %}

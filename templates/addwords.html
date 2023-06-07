@@ -1,0 +1,40 @@
+{% extends "base.html" %} 
+{% block content %}
+<div class="row">
+	<div class="col-sm-2"></div>
+	<div class="col-sm-8">
+		<h1 class="welcome p-4">Give words that will be added to the list for making the kids better</h1>
+	</div>
+	<div class="col-sm-2"></div>
+	<div class="col-sm-2"></div>
+	<div class="col-sm-8">
+		{% with messages = get_flashed_messages() %}
+			{% if messages %}
+				{% if 'error' in messages[0] or 'Error' in messages[0] %}
+					<div class="alert alert-danger">
+						{{messages[0]}}
+					</div>
+				{% else %}
+					  <div class="alert alert-success">
+						  {{messages[0]}}
+					  </div>
+				{% endif %}
+			{% endif %}
+		{% endwith %}
+	</div>
+	<div class="col-sm-2"></div>
+</div>
+<form action="/addwords" method="post">
+  <div class="form-group row">
+	<div class="col-sm-2"></div>
+	<div class="col-sm-8">
+	  <input type="text" class="form-control" id="inputWords" name="inputWords" placeholder="Type the words separated by ;">
+	</div>
+  </div>
+  <div class="form-group row wrap">
+	<div class="col-sm-10">
+	  <input type="submit" class="button" name="submit_button" value="SUBMIT"/>
+	</div>
+  </div>
+</form>
+{% endblock %}

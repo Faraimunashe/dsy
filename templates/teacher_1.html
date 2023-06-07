@@ -1,0 +1,36 @@
+{% extends "base.html" %} 
+{% block content %}
+<div class="row info">
+	<div class="col-sm-2"></div>
+	<div class="col-sm-8">
+		<h1 class="welcome p-4">Hey Teachers! Here's what you have to do...</h1>
+		<div class="card">
+			<div class = "writeup">
+				<p>You all are doing a fine job. This app has been made to help you. We have developed this application hoping that this will make the learning of kids more interesting. This will probably make your task easier too. We hope that this can help you all and the kids too. So, here we tell you what you have to do.</p>
+				<br>
+				<p>This section is for making the LISTENING ability of the kids better. All you have to do is add words which the kids find difficult to spell. As you are very experienced, you have a very good idea of the words which are difficult for them.</p>
+				<br>
+				<p>Here's how you do it:</p>
+				<ul>
+				  <li>Click the PROCEED button</li>
+				  <li>Type the words. The words must be separated by ;.</li>
+				  <li> These words will be read to the kids and they'll have to type in the place provided</li>
+				  <li>Just click SUBMIT. Hurrah! The words are added to the list of words that will help the kids to get better.</li>
+				  <li>We have provided you with a list of 25 words to start with.</li>
+				  <li>It would be great if you could explain the kids what they have to do in the listening section.</li>
+				</ul> 
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-2"></div>
+</div>
+<div class = "row ending_2">
+	<div class="col-sm-4"></div>
+	<div class="col-sm-4 text-center">
+		<div class="wrap">
+			<button class="button" onclick="window.location.href='{{ url_for( 'addwords' ) }}';">PROCEED</button>
+		</div>
+	</div>
+	<div class="col-sm-4"></div>
+</div>
+{% endblock %}

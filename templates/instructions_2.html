@@ -1,0 +1,38 @@
+<!doctype html>
+{% extends "base.html" %} 
+{% block content %}
+<div class="row info">
+	<div class="col-sm-2"></div>
+	<div class="col-sm-8">
+		<h1 class="welcome p-4">Be a master of reading...</h1>
+		<div class="card">
+			<div class = "writeup">
+				<h4>Hello Student</h4>
+				<p>We guess you all are bored of studying the usual way. So, we have made something for you. Let's see what you gotta do. In this section, you'll learn new words in a way.</p>
+				<br>
+				<p>Here are the steps:</p>
+				<ul>
+					<li>Click on the PROCEED button</li>
+					  <li>You will be taken to a new page. You will see a image on the left side. It will have 10 words written, with one word on one line.</li>
+					  <li>On the right side, you can see 10 text boxes. Each text box corresponds each word. Like if the first word in the image is 'Oil' and the second word is 'Boy'. Then, type 'Oil' in the first text box and 'Boy' in the second text box. <b>Please take care of the order of the words</b>.</li>
+					  <li><b>Take care of the case of the letters, i.e., see if the letter is capital or small.</b></li>
+					  <li><b>Also make sure that you don't change the page until you have written all the words.</b></li>
+					  <li>After writing the 10 ten words, click on SUBMIT button below</li>
+					  <li>You will be shown where you were perfect and where you missed a bit. Make sure you go through this page properly</li>
+					  <li>Practise these words multiple times so that you can become a master of these words.</li>
+				</ul> 
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-2"></div>
+</div>
+<div class="row ending_2">
+	<div class="col-sm-4"></div>
+	<div class="col-sm-4 text-center">
+		<div class="wrap">
+			<button class="button" onclick="window.location.href='{{ url_for( 'read' ) }}';">PROCEED</button>
+		</div>
+	</div>
+	<div class="col-sm-4"></div>
+</div>
+{% endblock %}
